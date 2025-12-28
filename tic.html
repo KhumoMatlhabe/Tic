@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tic Tac Toe</title>
+    <style>
+        body { text-align: center; font-family: Arial; }
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            gap: 5px;
+            justify-content: center;
+        }
+        button {
+            width: 100px;
+            height: 100px;
+            font-size: 36px;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Tic Tac Toe</h2>
+<div class="board">
+    <button onclick="play(0)"></button>
+    <button onclick="play(1)"></button>
+    <button onclick="play(2)"></button>
+    <button onclick="play(3)"></button>
+    <button onclick="play(4)"></button>
+    <button onclick="play(5)"></button>
+    <button onclick="play(6)"></button>
+    <button onclick="play(7)"></button>
+    <button onclick="play(8)"></button>
+</div>
+
+<script>
+    let board = ["", "", "", "", "", "", "", "", ""];
+    let player = "X";
+
+    function play(index) {
+        if (board[index] !== "") return;
+        board[index] = player;
+        document.getElementsByTagName("button")[index].innerText = player;
+
+        if (checkWin()) {
+            alert(player + " wins!");
+            location.reload();
+        }
+
+        player = player === "X" ? "O" : "X";
+    }
+
+    function checkWin() {
+        const wins = [
+            [0,1,2], [3,4,5], [6,7,8],
+            [0,3,6], [1,4,7], [2,5,8],
+            [0,4,8], [2,4,6]
+        ];
+        return wins.some(combo =>
+            combo.every(i => board[i] === player)
+        );
+    }
+</script>
+
+</body>
+</html>
